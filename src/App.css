@@ -3,3 +3,13 @@ body
     font-family: 'Open Sans Condensed', sans-serif !important;
     padding: 20px 60px;
 }
+
+a
+{
+    text-decoration: none;
+    color: black;
+}
+a:hover
+{
+    color: #aaa;
+}
