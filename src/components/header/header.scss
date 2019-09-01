@@ -25,6 +25,11 @@
         {
             padding: 10px 15px;
             cursor: pointer;
+
+            &:hover
+            {
+                color: #aaa;
+            }
         }
     }
 }

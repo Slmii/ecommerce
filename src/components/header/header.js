@@ -21,8 +21,8 @@ function Header({ currentUser }) {
                     CONTACT
                 </Link>
                 {
-                    currentUser ?
-                    <div className='option' onClick={() => auth.signOut()}>SIGN OUT</div> 
+                    currentUser 
+                    ? <div className='option' onClick={() => auth.signOut()}>SIGN OUT</div> 
                     : <Link className='option' to='/signin'>SIGN IN</Link>
                 }
             </div>

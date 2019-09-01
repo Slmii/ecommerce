@@ -5,7 +5,7 @@ import Header 			from './components/header/header';
 import HomePage 		from './pages/homepage/homepage';
 import ShopPage 		from './pages/shop/shop';
 import SignInSignUpPage from './pages/sign-in-sign-up/sign-in-sign-up';
-import { auth }			from './firebase/firebase.utils';
+import { auth, creatreUserProfileDocument } from './firebase/firebase.utils';
 
 import './App.css';
 
@@ -17,11 +17,31 @@ function App() {
 
 	// CHECK AUTH STATUS ON STATE CHANGE
 	useEffect(() => {
-		unsubscribeFromAuth.current = auth.onAuthStateChanged(user => setCurrentUser(user));
+		unsubscribeFromAuth.current = auth.onAuthStateChanged(async userAuth => {
+			// IF USER IS LOGGED OUT
+			if (!userAuth) 
+			{
+				// SET STATE BACK TO NULL
+				setCurrentUser(userAuth);
+				return false;
+			}
+
+			// GET THE USER (EXISTING OR NEWLY CREATED)
+			const userRef = await creatreUserProfileDocument(userAuth);
+			// LISTEN TO CHANGES IN THE DATA
+			userRef.onSnapshot(snapShot => {
+				setCurrentUser({
+					id: snapShot.id,
+					...snapShot.data()
+				});
+			});
+		});
 
 		// CLOSE THE SUBSCRIPTION ON UNMOUNT
 		return () => unsubscribeFromAuth();
 	}, []);
+
+	console.log(currentUser);
 
 	return (
 		<React.Fragment>
