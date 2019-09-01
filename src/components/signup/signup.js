@@ -36,7 +36,6 @@ function SignUp() {
             }
             console.log(error);
         }
-
     };
 
     const handleOnchange = e => {

@@ -41,8 +41,6 @@ function App() {
 		return () => unsubscribeFromAuth();
 	}, []);
 
-	console.log(currentUser);
-
 	return (
 		<React.Fragment>
 			<Header currentUser={currentUser} />

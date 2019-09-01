@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import CustomButton         from '../custom-button/custom-button';
 import FormInput        	from '../form-input/form-input';
-import { signInWithGoogle } from '../../firebase/firebase.utils';
+import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 
 import './signin.scss';
 
@@ -10,8 +10,23 @@ function SignIn() {
     const [signInData, setSignInData] = useState({ email: '', password: '' });
     const { email, password }         = signInData;
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
+        
+        try {
+            await auth.signInWithEmailAndPassword(email, password)
+            
+        } catch (error) {
+            // Handle Errors here.
+            const errorCode    = error.code;
+            const errorMessage = error.message;
+            if (errorCode === 'auth/wrong-password') {
+                alert('Wrong password.');
+            } else {
+                alert(errorMessage);
+            }
+            console.log(error);
+        }
         setSignInData({ email: '', password: '' });
     };
 
