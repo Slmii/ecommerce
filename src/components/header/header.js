@@ -38,7 +38,7 @@ function Header({ currentUser, history }) {
 };
 
 const mapStateToProps = ({ user }) => ({
-    currentUser: user
+    currentUser: user.currentUser
 });
 
 export default connect(mapStateToProps)(withRouter(Header));

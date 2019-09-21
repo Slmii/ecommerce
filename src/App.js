@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { connect }         from 'react-redux';
-import { Switch, Route }   from 'react-router-dom';
+import { connect }         			from 'react-redux';
+import { Switch, Route, Redirect }  from 'react-router-dom';
 
 import Header 			  from './components/header/header';
 import HomePage 		  from './pages/homepage/homepage';
@@ -49,11 +49,17 @@ function App(props) {
 			<Switch>
 				<Route exact path='/' component={HomePage} />
 				<Route exact path='/shop' component={ShopPage} />
-				<Route path='/signin' component={SignInSignUpPage} />
+				<Route exact path='/signin' render={() => props.currentUser ? <Redirect to='/' /> : <SignInSignUpPage />} />
 			</Switch>
 		</React.Fragment>
 	);
 }
+
+// SPECIFY WHICH REDUCERS THIS COMPONENT MIGHT NEED
+const mapStateToProps = ({ user }) => ({
+	// GET THE STATE OBJECT OF THE REDUCER
+	currentUser: user.currentUser
+});
 
 // SPECIFY WHICH ACTIONS THIS COMPONENT MIGHT NEED
 const mapDispatchToProps = dispatch => ({
@@ -62,4 +68,4 @@ const mapDispatchToProps = dispatch => ({
 });
 
 // SET FIRST ARGUMENT TO NULL BECAUSE WE DONT USE THE STATE FROM THE REDUCER IN THIS COMPONENT
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

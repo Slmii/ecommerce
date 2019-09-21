@@ -1,3 +1,5 @@
+import { UserActionTypes } from './user-types';
+
 // SET INITIAL VALUE OF THE REDUCER'S STATE
 const INITIAL_STATE = {
     currentUser: null
@@ -7,7 +9,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
     switch (action.type)
     {
         // CHECK TYPE
-        case 'SET_CURRENT_USER':
+        case UserActionTypes.SET_CURRENT_USER:
             return {
                 // ALWAYS RETURN THE FULL STATE BECAUSE REACT WONT UPDATE THE COMPONENT OTHERWISE. IT NEEDS TO BE A NEW OBJECT FOR THE STATE TO CHANGE
                 ...state,
