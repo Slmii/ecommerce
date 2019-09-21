@@ -15,9 +15,8 @@ function SignIn() {
         
         try {
             await auth.signInWithEmailAndPassword(email, password)
-            
         } catch (error) {
-            // Handle Errors here.
+            // HANDLE ERRORS
             const errorCode    = error.code;
             const errorMessage = error.message;
             if (errorCode === 'auth/wrong-password') {

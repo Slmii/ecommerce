@@ -24,7 +24,7 @@ export const creatreUserProfileDocument = async (userAuth, additionalData) => {
 
     if (!snapShot.exists)
     {
-        // GET DATA FROM USER
+        // GET DATA FROM USER (THE DISPLAY NAME PROPERTY DOESNT EXIST WITH createUserWithEmailAndPassword, INSTEAD IT GET PASSED IN THE additionalData OBJECT AS A PROPERTY )
         const { displayName, email } = userAuth;
         const createdAt              = new Date();
 

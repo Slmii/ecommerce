@@ -15,7 +15,7 @@ function SignUp() {
 
         if (password !== confirmPassword) 
         {
-            alert('Password do not match!');
+            alert('Passwords do not match!');
             return false;
         }
 
@@ -26,7 +26,7 @@ function SignUp() {
             
             setSignInData({ displayName: '', email: '', password: '', confirmPassword: '' });
         } catch (error) {
-            // Handle Errors here.
+            // HANDLE ERRORS
             const errorCode    = error.code;
             const errorMessage = error.message;
             if (errorCode === 'auth/weak-password') {
