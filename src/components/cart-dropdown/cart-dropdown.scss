@@ -13,6 +13,17 @@
     right: 40px;
     z-index: 5;
   
+    .cart-empty
+    {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+        align-items: center;
+        font-size: 24px;
+    }
+
     .cart-items 
     {
         height: 240px;
