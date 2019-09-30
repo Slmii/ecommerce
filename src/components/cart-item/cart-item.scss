@@ -1,0 +1,36 @@
+.cart-item
+{
+    width: 100%;
+    display: flex;
+    height: 80px;
+    margin-bottom: 20px;
+
+    img
+    {
+        width: 30%;
+        margin-right: 20px;
+    }
+
+    .item-details
+    {
+        width: 60%;
+        font-size: 18px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .item-remove
+    {
+        width: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        [data-icon]
+        {
+            cursor: pointer;
+            color: red;
+        }
+    }
+}

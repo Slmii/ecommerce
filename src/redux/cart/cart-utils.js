@@ -16,3 +16,5 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
     // THIS WILL ADD THE EXTRA PROPERTY 'QUANTITY' SINCE THE FIRST TIME THE CART ITEM NEVER EXISTS
     return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
 };
+
+export const removeItemFromCart = (cartItems, id) => cartItems.filter(cartItem => cartItem.id !== id);
