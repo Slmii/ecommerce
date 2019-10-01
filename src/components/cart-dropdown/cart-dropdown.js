@@ -1,27 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { connect }                    from 'react-redux';
 
-import CartItem     from '../cart-item/cart-item';
-import CustomButton from '../custom-button/custom-button';
+import CartItem            from '../cart-item/cart-item';
+import CustomButton        from '../custom-button/custom-button';
+import { selectCartItems, selectCartTotal } from '../../redux/cart/cart-selectors';
 
 import './cart-dropdown.scss';
 
-function CartDropdown({ cartItems }) {
+function CartDropdown({ cartItems, total }) {
 
     const [items, setItems] = useState([]);
     
     useEffect(() => {
         setItems(cartItems);
-    }, [items]);
+    }, [cartItems]);
     
     return (
         <div className='cart-dropdown'>
-            {   cartItems.length < 1
+            {   items.length < 1
                 ? <div className='cart-empty'>NO ITEMS IN YOUR SHOPPING CART</div>
                 : <>
                     <div className='cart-items'>
-                        {cartItems.map(cartItem => <CartItem key={cartItem.id} item={cartItem} />)}
+                        {items.map(cartItem => <CartItem key={cartItem.id} item={cartItem} />)}
                     </div>
+                    <div className='cart-total'>Total: &euro;{total}</div>
                     <CustomButton>GO TO CHECKOUT</CustomButton>
                   </>
             }
@@ -29,8 +31,9 @@ function CartDropdown({ cartItems }) {
     ); 
 }
 
-const mapStateToProps = ({ cart: { cartItems } }) => ({
-    cartItems
+const mapStateToProps = state => ({
+    cartItems: selectCartItems(state),
+    total: selectCartTotal(state)
 });
 
 export default connect(mapStateToProps)(CartDropdown);
