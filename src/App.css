@@ -18,3 +18,9 @@ a:hover
 {
     box-sizing: border-box;
 }
+
+[data-icon='trash-alt']
+{
+    cursor: pointer;
+    color: red;
+}

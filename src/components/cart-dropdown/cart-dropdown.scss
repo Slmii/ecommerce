@@ -16,12 +16,9 @@
   
     .cart-empty
     {
-        height: 337px;
-        width: 100%;
         display: flex;
-        flex-wrap: wrap;
         text-align: center;
-        align-items: center;
+        margin: auto;
         font-size: 24px;
     }
 

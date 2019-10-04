@@ -1,12 +1,15 @@
-import React                from 'react';
-import { connect }          from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import React                        from 'react';
+import { connect }                  from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { Link, withRouter }         from 'react-router-dom';
 
-import CartIcon     from '../cart-icon/cart-icon';
-import CartDropdown from '../cart-dropdown/cart-dropdown';
-import { auth }     from '../../firebase/firebase.utils';
-// USE REACTOMPONENT AS X WHEN IMPORTING SVG IMAGES
+import CartIcon                   from '../cart-icon/cart-icon';
+import CartDropdown               from '../cart-dropdown/cart-dropdown';
+import { auth }                   from '../../firebase/firebase.utils';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
+import { selectCartHidden }       from '../../redux/cart/cart-selectors';
+import { selectCurrentUser }      from '../../redux/user/user-selectors';
+import { toggleCartHidden }       from '../../redux/cart/cart-actions';
 
 import './header.scss';
 
@@ -41,9 +44,13 @@ function Header({ currentUser, hidden, history }) {
     );
 };
 
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
-    currentUser,
-    hidden
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser,
+    hidden: selectCartHidden
 });
 
-export default connect(mapStateToProps)(withRouter(Header));
+const mapDispatchToProps = dispatch => ({
+    toggleCartHidden: () => dispatch(toggleCartHidden())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header));

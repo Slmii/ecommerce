@@ -1,15 +1,18 @@
 import React, { useEffect, useRef } from 'react';
 import { connect }         			from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import { Switch, Route, Redirect }  from 'react-router-dom';
 
 import Header 			  from './components/header/header';
+import CheckoutPage	  	  from './pages/checkout/checkout';
 import HomePage 		  from './pages/homepage/homepage';
 import ShopPage 		  from './pages/shop/shop';
 import SignInSignUpPage   from './pages/sign-in-sign-up/sign-in-sign-up';
 import { auth, creatreUserProfileDocument } from './firebase/firebase.utils';
-import { setCurrentUser } from './redux/user/user-actions';
+import { setCurrentUser } 					from './redux/user/user-actions';
 
 import './App.css';
+import { selectCartItems } from './redux/cart/cart-selectors';
 
 function App(props) {
 	const { setCurrentUser } = props;
@@ -48,7 +51,8 @@ function App(props) {
 			<Header />
 			<Switch>
 				<Route exact path='/' component={HomePage} />
-				<Route exact path='/shop' component={ShopPage} />
+				<Route exact path='/checkout' component={CheckoutPage} />
+				<Route path='/shop' component={ShopPage} />
 				<Route exact path='/signin' render={() => props.currentUser ? <Redirect to='/' /> : <SignInSignUpPage />} />
 			</Switch>
 		</React.Fragment>
@@ -56,9 +60,8 @@ function App(props) {
 }
 
 // SPECIFY WHICH REDUCERS THIS COMPONENT MIGHT NEED
-const mapStateToProps = ({ user }) => ({
-	// GET THE STATE OBJECT OF THE REDUCER
-	currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector({
+	cartItems: selectCartItems
 });
 
 // SPECIFY WHICH ACTIONS THIS COMPONENT MIGHT NEED
