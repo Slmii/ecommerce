@@ -11,10 +11,10 @@ import rootReducer from './root-reducer';
 // });
 
 // applyMiddleWare EXPECTS AN ARRAY OF MIDDLEWARES
-const middleWares = [
-    logger,
-    //thunk.withExtraArgument(axiosInstance)
-];
+const middleWares = [];
+
+if (process.env.NODE_ENV === 'development') middleWares.push(logger);
+//thunk.withExtraArgument(axiosInstance)
 
 // CREATE THE STORE
 export const store = createStore(
